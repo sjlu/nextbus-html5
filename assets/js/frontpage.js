@@ -10,15 +10,13 @@ var Frontpage = function()
 
     function write_prediction(d)
     {
-        console.log(d);
-
         times = [];
         for (var i in d.predictions)
             times.push(d.predictions[i].minutes);
 
         var first = times.shift();
 
-        var html = '<td>'+d.line.title+'</td><td><span class="label label-inverse">'+first+' minutes</span><br />'+times.join(", ")+'</td>';
+        var html = '<td><b>'+d.line.title+'</b><br><span class="direction">'+d.line.direction.title+'</span></td><td><span class="label label-inverse">'+first+' minutes</span><br />'+times.join(", ")+'</td>';
 
         var elem = $("tr."+d.line.tag+"."+d.line.direction.tag);
         if (elem.is('*'))
