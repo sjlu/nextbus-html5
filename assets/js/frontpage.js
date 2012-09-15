@@ -1,62 +1,39 @@
-/**
- * Light Javascript "class" frameworking for you
- * to organize your code a little bit better.
- *
- * If you want more complex things, I'd suggest
- * importing something like Backbone.js as it
- * has much better abilities to handle a MVC
- * like framework including persistant stores (+1)
- *
- * @author  sjlu (Steven Lu)
- */
 var Frontpage = function()
 {
-    /**
-     * The exports variable is responsible for
-     * storing and returning public functions
-     * in the instantized class.
-     */
-    var exports = {};
+    var exports = {}
 
-    /**
-     * Write your public functions like this.
-     * Make sure you include it into the exports
-     * variable.
-     */
-    function public_function() 
+    function set_title(title)
     {
-        /**
-         * Note that we can still call
-         * private functions within the scope
-         * of the "class".
-         */
-        private_function();
+        $('h3#title').html(title);
     }
-    exports.public_function = public_function;
+    exports.set_title = set_title;
 
-    /**
-     * Private functions are very similar, they
-     * just are not included in the exports 
-     * function.
-     */
-     function private_function()
-     {
+    function write_prediction(d)
+    {
+        console.log(d);
 
-     }
+        times = [];
+        for (var i in d.predictions)
+            times.push(d.predictions[i].minutes);
 
-     /**
-      * You may wanna have a init() function
-      * to do all your bindings for the class.
-      */
-     function init()
-     {
+        var first = times.shift();
 
-     }
-     exports.init = init;
+        var html = '<td>'+d.line.title+'</td><td><span class="label label-inverse">'+first+' minutes</span><br />'+times.join(", ")+'</td>';
 
-     /**
-      * Last but not least, we have to return
-      * the exports object.
-      */
-     return exports;
+        var elem = $("tr."+d.line.tag+"."+d.line.direction.tag);
+        if (elem.is('*'))
+            elem.html(html);
+        else
+            $('tbody').append('<tr class="'+d.line.tag+' '+d.line.direction.tag+'">'+html+'</tr>');
+
+    }
+    exports.write_prediction = write_prediction;
+
+    function init()
+    {
+
+    }
+    exports.init = init;
+
+    return exports;
 };
