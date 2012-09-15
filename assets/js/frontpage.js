@@ -15,8 +15,14 @@ var Frontpage = function()
             times.push(d.predictions[i].minutes);
 
         var first = times.shift();
+        var color = 'label-inverse';
+        if (first < 5)
+            color = 'label-warning';
 
-        var html = '<td><b>'+d.line.title+'</b><br><span class="direction">'+d.line.direction.title+'</span></td><td><span class="label label-inverse">'+first+' minutes</span><br />'+times.join(", ")+'</td>';
+        if (first < 3)
+            color = 'label-important';
+
+        var html = '<td><b>'+d.line.title+'</b><br><span class="direction">'+d.line.direction.title+'</span></td><td><span class="label '+color+'">'+first+' minutes</span><br />'+times.join(", ")+'</td>';
 
         var elem = $("tr."+d.line.tag+"."+d.line.direction.tag);
         if (elem.is('*'))
