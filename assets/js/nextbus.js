@@ -68,8 +68,10 @@ var Nextbus = function()
 						if (p == null)
 							return;
 
-						var id = d.ref().path.j[3];
-						var line = d.ref().path.j[2];
+						console.log(d.ref().path);
+
+						var id = d.ref().path.k[3];
+						var line = d.ref().path.k[2];
 
 						event_listener({
 							line: stop[id].lines[line],
